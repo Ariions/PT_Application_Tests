@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 3262310998
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: referenceimages-gamma-windowsplayer-direct3d11-none
+      Dependencies: {}

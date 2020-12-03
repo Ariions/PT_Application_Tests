@@ -1,0 +1,26 @@
+ManifestFileVersion: 0
+CRC: 1178872465
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 88a60073a8a02d2116b69ee864680af9
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: b0363f7088f9761414f730641bf9a24b
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/ReferenceImages/Gamma/WindowsPlayer/Direct3D11/None/Terrain.png
+- Assets/ReferenceImages/Gamma/WindowsPlayer/Direct3D11/None/AreEqual_WithSlightlyDifferentImages_SucceedsWithAppropriateTolerance.diff.png
+- Assets/ReferenceImages/Gamma/WindowsPlayer/Direct3D11/None/AreEqual_WithTotallyDifferentImages_ThrowsAssertionException.png
+- Assets/ReferenceImages/Gamma/WindowsPlayer/Direct3D11/None/AreEqual_WidthDifferentSizeImages_ThrowsAssertionException.png
+- Assets/ReferenceImages/Gamma/WindowsPlayer/Direct3D11/None/AreEqual_WithTotallyDifferentImages_ThrowsAssertionException.diff.png
+- Assets/ReferenceImages/Gamma/WindowsPlayer/Direct3D11/None/Tree.png
+- Assets/ReferenceImages/Gamma/WindowsPlayer/Direct3D11/None/AreEqual_WithTotallyDifferentImages_ThrowsAssertionException.expected.png
+- Assets/ReferenceImages/Gamma/WindowsPlayer/Direct3D11/None/AreEqual_WithSlightlyDifferentImages_SucceedsWithAppropriateTolerance.expected.png
+- Assets/ReferenceImages/Gamma/WindowsPlayer/Direct3D11/None/AreEqual_WithSlightlyDifferentImages_SucceedsWithAppropriateTolerance.png
+- Assets/ReferenceImages/Gamma/WindowsPlayer/Direct3D11/None/HeightMap.png
+Dependencies: []
