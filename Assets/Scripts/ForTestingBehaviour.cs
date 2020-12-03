@@ -6,6 +6,7 @@ public class ForTestingBehaviour : MonoBehaviour
 {
     public GameObject Prefab_TerrainBase;
     public GameObject Prefab_TerrainTree;
+    public GameObject Prefab_TerrainHoles;
     public GameObject Prefab_TerrainHight;
     public TerrainData te;
 
@@ -13,7 +14,6 @@ public class ForTestingBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame

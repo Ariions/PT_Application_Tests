@@ -13,17 +13,16 @@ public class TerrainTests : TestTemplate
     GameObject Prefab_TerrainBase => GenericTestMethods.GetPrefab("BaseTerrain");
     GameObject Prefab_TerrainTree => GenericTestMethods.GetPrefab("TerrainTree");
     GameObject Prefab_TerrainHight => GenericTestMethods.GetPrefab("TerrainHightMap");
+    GameObject Prefab_TerrainHoles => GenericTestMethods.GetPrefab("TerrainHoles");
+    GameObject Prefab_CollitionDetector => GenericTestMethods.GetPrefab("CollitionDetector");
     GameObject Prefab_MainCamera => GenericTestMethods.GetPrefab("Gameplay_Camera");
 
-    GameObject listener;
 
     [SetUp]
     public override void Setup()
     {
         base.Setup();
-        GameManager.InitializeTestingEnvironment(false, false, true, false, false);
         Object.Instantiate(Prefab_MainCamera);
-        InitializeAudioListener();
     }
 
     [Test]
@@ -66,7 +65,6 @@ public class TerrainTests : TestTemplate
         terrain[1] = (GameObject)Object.Instantiate(Prefab_TerrainTree);
         terrain[2] = (GameObject)Object.Instantiate(Prefab_TerrainHight);
 
-        Debug.Log(Terrain.activeTerrains.Length);
         Assert.IsTrue(Terrain.activeTerrains.Length == 3);
     }
 
@@ -83,7 +81,7 @@ public class TerrainTests : TestTemplate
     }
 
     [Test]
-    public void _6SetGetNeighborAPI()
+    public void _06SetGetNeighborAPI()
     {
         Terrain terrainMain      = Object.Instantiate(Prefab_TerrainBase).GetComponent<Terrain>();
 
@@ -100,31 +98,59 @@ public class TerrainTests : TestTemplate
         Assert.IsTrue(terrainMain.bottomNeighbor    == terrainBottom);    
     }
 
-
-    [TearDown]
-    public virtual void Teardown()
+    [Test]
+    public void _07CheckForHoles()
     {
-        GenericTestMethods.ClearScene();
+        Terrain terrain = Object.Instantiate(Prefab_TerrainHoles).GetComponent<Terrain>();
+        Terrain terrainBase = Object.Instantiate(Prefab_TerrainBase).GetComponent<Terrain>();
 
-        if (listener)
-            Object.DestroyImmediate(listener);
+        bool hasHoles = false;
+        bool BaseHasHoles = false;
+
+        foreach(bool ishole in terrain.terrainData.GetHoles(1,1,1,1))
+        {
+            hasHoles ^= ishole;
+        }
+        foreach (bool ishole in terrainBase.terrainData.GetHoles(1, 1, 1, 1))
+        {
+            BaseHasHoles ^= ishole;
+        }
+
+        Assert.IsTrue(hasHoles);
+        Assert.IsTrue(!BaseHasHoles);
     }
 
-    private void InitializeAudioListener()
+    [UnityTest]
+    public IEnumerator _08CollidingWithTerrainFlat()
     {
-        //Disables Audio Listener warning spam
-        listener = new GameObject("TestListener");
-        listener.AddComponent<AudioListener>();
-        listener.AddComponent<TestAudioListener>();
-        Object.DontDestroyOnLoad(listener);
+        GameObject terrain = Object.Instantiate(Prefab_TerrainBase, Vector3.zero, Quaternion.identity);
+        GameObject Ball = Object.Instantiate(Prefab_CollitionDetector, new Vector3(12f, 1f, 12f), Quaternion.identity);
+
+        yield return new WaitForSeconds(1f);
+        yield return null;
+        Assert.IsTrue(Ball.GetComponent<DetectColition>().collided);
     }
 
-    Texture2D toTexture2D(RenderTexture rTex)
+    [UnityTest]
+    public IEnumerator _09CollidingWithTerrainHoles()
     {
-        Texture2D tex = new Texture2D(512, 512, TextureFormat.RGB24, false);
-        RenderTexture.active = rTex;
-        tex.ReadPixels(new Rect(0, 0, rTex.width, rTex.height), 0, 0);
-        tex.Apply();
-        return tex;
+        GameObject terrain = Object.Instantiate(Prefab_TerrainHoles, Vector3.zero, Quaternion.identity);
+        GameObject Ball = Object.Instantiate(Prefab_CollitionDetector, new Vector3(500f, 1f, 500f), Quaternion.identity);
+
+        yield return new WaitForSeconds(1f);
+        yield return null;
+        Assert.IsTrue(!Ball.GetComponent<DetectColition>().collided);
     }
+
+    [UnityTest]
+    public IEnumerator _10CollidingWithTerrainSlope()
+    {
+        GameObject terrain = Object.Instantiate(Prefab_TerrainHight, Vector3.zero, Quaternion.identity);
+        GameObject Ball = Object.Instantiate(Prefab_CollitionDetector, new Vector3(500f, 70f, 500f), Quaternion.identity);
+
+        yield return new WaitForSeconds(1f);
+        yield return null;
+        Assert.IsTrue(Ball.GetComponent<DetectColition>().collided);
+    }
+
 }

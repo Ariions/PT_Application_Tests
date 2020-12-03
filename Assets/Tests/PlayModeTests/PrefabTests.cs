@@ -15,15 +15,11 @@ public class PrefabTests : TestTemplate
     GameObject Prefab_TerrainHight => GenericTestMethods.GetPrefab("TerrainHightMap");
     GameObject Prefab_MainCamera => GenericTestMethods.GetPrefab("Gameplay_Camera");
 
-    GameObject listener;
-
     [SetUp]
     public override void Setup()
     {
         base.Setup();
-        GameManager.InitializeTestingEnvironment(false, false, true, false, false);
         Object.Instantiate(Prefab_MainCamera);
-        InitializeAudioListener();
     }
 
     [Test]
@@ -50,21 +46,4 @@ public class PrefabTests : TestTemplate
         Assert.IsNotNull(Prefab_TerrainBase.GetComponent<TerrainCollider>());
     }
 
-    [TearDown]
-    public virtual void Teardown()
-    {
-        GenericTestMethods.ClearScene();
-
-        if (listener)
-            Object.DestroyImmediate(listener);
-    }
-
-    private void InitializeAudioListener()
-    {
-        //Disables Audio Listener warning spam
-        listener = new GameObject("TestListener");
-        listener.AddComponent<AudioListener>();
-        listener.AddComponent<TestAudioListener>();
-        Object.DontDestroyOnLoad(listener);
-    }
 }
