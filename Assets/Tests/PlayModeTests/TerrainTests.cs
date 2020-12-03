@@ -27,31 +27,7 @@ public class TerrainTests : TestTemplate
     }
 
     [Test]
-    public void _01TerrainPrefabExists()
-    {
-        Assert.NotNull(Prefab_TerrainBase);
-    }
-
-    [Test]
-    public void _02TerrainPrefabComponentTransform()
-    {
-        Assert.IsNotNull(Prefab_TerrainBase.GetComponent<Transform>());
-    }
-
-    [Test]
-    public void _03TerrainPrefabComponentTerrain()
-    {
-        Assert.IsNotNull(Prefab_TerrainBase.GetComponent<Terrain>());
-    }
-
-    [Test]
-    public void _04TerrainPrefabComponentTerrainCollider()
-    {
-        Assert.IsNotNull(Prefab_TerrainBase.GetComponent<TerrainCollider>());
-    }
-
-    [Test]
-    public void _05CreateTerrainGameObjectAPI()
+    public void _01CreateTerrainGameObjectAPI()
     {
         GameObject terrain = (GameObject)Terrain.CreateTerrainGameObject(new TerrainData());
         terrain.name = "NewTarrain";
@@ -59,7 +35,7 @@ public class TerrainTests : TestTemplate
     }
 
     [Test]
-    public void _06CreateTerrainGameObjectDefaultValuesRight()
+    public void _02CreateTerrainGameObjectDefaultValuesRight()
     {
         TerrainData data = new TerrainData();
 
@@ -76,14 +52,14 @@ public class TerrainTests : TestTemplate
     }
 
     [Test]
-    public void _07GetActiveTerrainAPI()
+    public void _03GetActiveTerrainAPI()
     {
         GameObject terrain = (GameObject)Object.Instantiate(Prefab_TerrainBase);
         Assert.IsTrue(Terrain.activeTerrain.gameObject == terrain);
     }
 
     [Test]
-    public void _08GetActiveTerrainsAPI()
+    public void _04GetActiveTerrainsAPI()
     {
         GameObject[] terrain = new GameObject[3];
         terrain[0] = (GameObject)Object.Instantiate(Prefab_TerrainBase);
@@ -95,7 +71,7 @@ public class TerrainTests : TestTemplate
     }
 
     [Test]
-    public void _09AddTreeInstanceAPI()
+    public void _05AddTreeInstanceAPI()
     {
         GameObject GO = (GameObject)Object.Instantiate(Prefab_TerrainTree);
         Terrain terrain = GO.GetComponent<Terrain>();
@@ -107,7 +83,7 @@ public class TerrainTests : TestTemplate
     }
 
     [Test]
-    public void _10SetGetNeighborAPI()
+    public void _6SetGetNeighborAPI()
     {
         Terrain terrainMain      = Object.Instantiate(Prefab_TerrainBase).GetComponent<Terrain>();
 
@@ -122,23 +98,6 @@ public class TerrainTests : TestTemplate
         Assert.IsTrue(terrainMain.leftNeighbor      == terrainLeft);
         Assert.IsTrue(terrainMain.rightNeighbor     == terrainRight);
         Assert.IsTrue(terrainMain.bottomNeighbor    == terrainBottom);    
-    }
-
-
-    [Test]
-    public void _11GetNormalMapAPI()
-    {
-        Terrain terrain = Object.Instantiate(Prefab_TerrainHight).GetComponent<Terrain>();
-
-        RenderTexture normalMap = terrain.normalmapTexture;
-
-        /* for graphics tests
-        Texture2D normalMapTexture = toTexture2D(normalMap);
-        ImageConversion.EncodeToPNG(normalMapTexture);
-        */
-
-        Assert.NotNull(normalMap);
-
     }
 
 
