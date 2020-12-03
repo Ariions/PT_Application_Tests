@@ -1,14 +1,16 @@
 {
-    "name": "PlayModeTests",
+    "name": "EditorTests",
     "rootNamespace": "",
     "references": [
-        "GUID:27619889b8ba8c24980f49ee34dbb44a",
-        "GUID:0acc523941302664db1f4e527237feb3",
-        "GUID:6902340bab38b474b9909b3f01351e8d",
-        "GUID:93a834049a551a847b9bd6d645b4aa5c",
-        "GUID:c081bc530f560634bb5c21d4b323a7f1"
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "UnityEditor.TestTools.Graphics",
+        "Scripts",
+        "TestMethods"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
