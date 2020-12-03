@@ -99,25 +99,13 @@ public class TerrainTests : TestTemplate
     }
 
     [Test]
-    public void _07CheckForHoles()
+    public void _07CheckHeight()
     {
-        Terrain terrain = Object.Instantiate(Prefab_TerrainHoles).GetComponent<Terrain>();
-        Terrain terrainBase = Object.Instantiate(Prefab_TerrainBase).GetComponent<Terrain>();
+        Terrain terrain = Object.Instantiate(Prefab_TerrainHight).GetComponent<Terrain>();
 
-        bool hasHoles = false;
-        bool BaseHasHoles = false;
 
-        foreach(bool ishole in terrain.terrainData.GetHoles(1,1,1,1))
-        {
-            hasHoles ^= ishole;
-        }
-        foreach (bool ishole in terrainBase.terrainData.GetHoles(1, 1, 1, 1))
-        {
-            BaseHasHoles ^= ishole;
-        }
+        Assert.IsTrue(System.Math.Round(terrain.terrainData.GetHeight(5,5),5) == System.Math.Round(4.72441f,5));
 
-        Assert.IsTrue(hasHoles);
-        Assert.IsTrue(!BaseHasHoles);
     }
 
     [UnityTest]
