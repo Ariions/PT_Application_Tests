@@ -1,3 +1,6 @@
 Assets/Scenes/Terrain/Terrain.unity
-Assets/Scenes/Tree/Tree.unity
+Assets/Scenes/TreeModel/TreeModel.unity
 Assets/Scenes/HeightMap/HeightMap.unity
+Assets/Scenes/TerrainTextured/TerrainTextures.unity
+Assets/Scenes/TerrainTrees/TerrainTrees.unity
+Assets/Scenes/TerrainFull/TerrainFull.unity
